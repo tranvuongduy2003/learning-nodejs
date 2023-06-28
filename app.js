@@ -4,6 +4,19 @@ const express = require("express");
 
 const app = express();
 
-const server = http.createServer(app);
+app.use("/", (req, res, next) => {
+  console.log("This always run");
+  next();
+});
 
-server.listen(3000);
+app.use("/products", (req, res, next) => {
+  console.log("This is Product Page");
+  res.send("<h1>This is Product Page</h1>");
+});
+
+app.use("/", (req, res, next) => {
+  console.log("Hello expess!");
+  res.send("<h1>Hello expess!</h1>");
+});
+
+app.listen(3000);
